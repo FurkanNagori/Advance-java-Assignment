@@ -1,5 +1,6 @@
+ <jsp:include page='/Header.jsp'/>
  <head>
- <link rel='stylesheet' type='text/css' href='/customerRegistration/css/styles.css'>
+ <link rel='stylesheet' type='text/css' href='/customerRegistration/css/loginPage.css'>
  <script src='/customerRegistration/js/LoginForm.js'></script>
  <title>Customer Registration</title>
  </head>
@@ -33,3 +34,4 @@
                 </div>
             </div>
     </div>
+     <jsp:include page='/Footer.jsp'/>

@@ -1,0 +1,40 @@
+<link rel='stylesheet' type='text/css' href='/customerRegistration/css/headerFooter.css'>
+
+
+ <!--
+   templateType: global_partial
+   label: Website header
+ -->
+ <header class="bg-primary-gradiant">
+   <div class="pt-10 pb-10 pl-0-lg pr-0-lg pl-10 pr-10 c-container m-auto ">
+     <ul class="list-style-type-none flex justify-between align-items-center m-0">
+       <li class="head-nav-item w-10-lg w-50">
+         <a href="#" class="head-nav-item-logo text-decoration-none text-white"><img src='/customerRegistration/images/logo3.svg' height='50' class = 'logo'></a>
+       </li>
+       <li class="head-nav-item-button hidden-lg show-md w-50 text-right" id="navToggle">
+         <div class="glow-on-hover inline-block">
+         <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" class="text-white" fill="#fff" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h8m-8 6h16" />
+         </svg>
+         </div>
+       </li>
+       <li class="show hidden-md w-50-lg w-100">
+         <ul id="navLinkBox" class="m-0 list-style-type-none flex-lg hidden justify-between align-items-center">
+           <li class="head-nav-item">
+             <a href="#" class="text-decoration-none text-white ">HOTWAX</a>
+           </li>
+           <li class="head-nav-item">
+             <a href="/customerRegistration/LoginPage.jsp"class="head-nav-item-button pt-10 pb-10 pl-15 pr-15 rounded-full inline-flex justify-center align-items-center shadow text-bold glow-on-hover position-relative mt-0-lg mt-15">
+               <span class="text-white">Sign In </span>
+               <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" class="text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+               </svg>
+             </a>
+           </li>
+         </ul>
+       </li>
+     </ul>
+   </div>
+ </header>
+ <main>
+

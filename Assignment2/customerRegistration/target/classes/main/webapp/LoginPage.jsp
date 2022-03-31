@@ -1,20 +1,22 @@
- <link rel='stylesheet' type='text/css' href='/customerRegistration/css/styles.css'>
+ <jsp:include page='/Header.jsp'/>
+ <head>
+ <link rel='stylesheet' type='text/css' href='/customerRegistration/css/loginPage.css'>
  <script src='/customerRegistration/js/LoginForm.js'></script>
-
+ <title>Customer Registration</title>
+ </head>
  <div class="container">
             <div class="myCard">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="myLeftCtn">
-
                         <form  method='post' class="myForm text-center needs-validation" onsubmit="return validateForm(this)"  action='/customerRegistration/Login.jsp'>
                             <header>LOGIN</header>
                             <div class="form-group">
                                 <i class="fas fa-user"></i>
                                 <input class="myInput" type="text" placeholder="Username" id="username" required>
-                                <br><br><div class="invalid-feedback">Please fill out this field.</div>
+                                <br><br>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
-
                             <br>
                             <div class="form-group">
                                 <i class="fas fa-lock"></i>
@@ -25,23 +27,11 @@
                             <input type="submit" class="butt" value="LOGIN">
                             <br><br>
                             <header>New user</header>
-                            <a href="">
+                            <a href="/customerRegistration/RegistrationForm.jsp" class="butt">create new account</a>
                         </form>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="myRightCtn">
-                                <div class="box"><header>Hello World!</header>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                                    aliqua. Ut enim ad minim veniam.</p>
-                                    <input type="button" class="butt_out" value="Learn More"/>
-                                </div>
-
                         </div>
                     </div>
                 </div>
             </div>
     </div>
+     <jsp:include page='/Footer.jsp'/>
