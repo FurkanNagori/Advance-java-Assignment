@@ -1,11 +1,5 @@
-<jsp:useBean id='UserBean' scope='request' class='bean.UserBean'/>
-<jsp:setProperty name='userBean' property='firstName'/>
-<jsp:setProperty name='userBean' property='lastName'/>
-<jsp:setProperty name='userBean' property='city'/>
-<jsp:setProperty name='userBean' property='firstName'/>
-<jsp:setProperty name='userBean' property='firstName'/>
-<jsp:setProperty name='userBean' property='firstName'/>
-<jsp:setProperty name='userBean' property='firstName'/>
-<jsp:setProperty name='userBean' property='firstName'/>
-<jsp:setProperty name='userBean' property='firstName'/>
-<jsp:forward page='/AddDesignation' />
+<jsp:useBean id='userBean' scope='request' class='bean.UserBean'/>
+<jsp:useBean id='userLoginBean' scope='request' class='bean.UserLoginBean'/>
+<jsp:setProperty name='userBean' property='*'/>
+<jsp:setProperty name='userLoginBean' property='*'/>
+<jsp:forward page='/Registration'/>

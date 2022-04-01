@@ -4,6 +4,11 @@ body
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.error
+{
+color:red;
+}
+
 .container
 {
     width: 400px;

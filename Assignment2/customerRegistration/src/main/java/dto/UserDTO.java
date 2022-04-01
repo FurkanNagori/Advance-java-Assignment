@@ -1,8 +1,7 @@
-package bean;
+package dto;
 
-public class UserBean implements java.io.Serializable, Comparable<UserBean> {
-
-    private int partyId;
+public class UserDTO implements java.io.Serializable,Comparable<UserDTO>
+{private int partyId;
     private String firstName;
     private String lastName;
     private String address;
@@ -13,7 +12,7 @@ public class UserBean implements java.io.Serializable, Comparable<UserBean> {
     private String phone;
 
 
-    public UserBean() {
+    public UserDTO() {
         this.partyId = 0;
         this.firstName = "";
         this.lastName = "";
@@ -99,12 +98,12 @@ public class UserBean implements java.io.Serializable, Comparable<UserBean> {
 
 
     public boolean equals(Object object) {
-        if (!(object instanceof UserBean)) return false;
-        UserBean userBean = (UserBean) object;
-        return this.address.equalsIgnoreCase(userBean.address);
+        if (!(object instanceof UserDTO)) return false;
+        UserDTO userDTO = (UserDTO) object;
+        return this.address.equalsIgnoreCase(userDTO.address);
     }
 
-    public int compareTo(UserBean other) {
+    public int compareTo(UserDTO other) {
         return this.address.compareTo(other.address);
     }
 
@@ -112,4 +111,3 @@ public class UserBean implements java.io.Serializable, Comparable<UserBean> {
         return partyId;
     }
 }
-
