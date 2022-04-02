@@ -6,6 +6,10 @@ import dto.UserDTO;
 import dto.UserLoginDTO;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class UserDAO {
 
@@ -68,4 +72,73 @@ public class UserDAO {
         }
 
     }
+
+
+    public Map<UserLoginDTO,UserDTO> getAll() throws DAOException
+    {
+        Map<UserLoginDTO,UserDTO> userDTOS = new HashMap<>();
+
+        try
+        {
+            Connection connection = DAOConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("Select party.partyid,party.firstname,party.lastname,party.address,party.city,party.zip,party.state,party.country,party.phone,userlogin.userloginid  from party inner join userlogin on party.partyid=userlogin.partyid order by party.firstname");
+            UserDTO userDTO;
+            UserLoginDTO userLoginDTO;
+            while(resultSet.next())
+            {
+                userDTO = new UserDTO();
+                userLoginDTO = new UserLoginDTO();
+                userDTO.setPartyId(resultSet.getInt("partyid"));
+                userDTO.setFirstName(resultSet.getString("firstname").trim());
+                userDTO.setLastName(resultSet.getString("lastname").trim());
+                userDTO.setAddress(resultSet.getString("address").trim());
+                userDTO.setCity(resultSet.getString("city").trim());
+                userDTO.setZip(resultSet.getInt("zip"));
+                userDTO.setState(resultSet.getString("state").trim());
+                userDTO.setCountry(resultSet.getString("country").trim());
+                userDTO.setPhone(resultSet.getString("phone").trim());
+                userLoginDTO.setUsername(resultSet.getString("userloginid").trim());
+                userDTOS.put(userLoginDTO,userDTO);
+            }
+            connection.close();
+            statement.close();
+            resultSet.close();
+            return userDTOS;
+
+        }catch(Exception exception)
+        {
+            throw new DAOException(exception.getMessage());
+        }
+    }
+
+
+    public UserLoginDTO getByUsername(String username) throws DAOException
+    {
+        try
+        {
+            Connection connection = DAOConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from userlogin where userloginid=?");
+            preparedStatement.setString(1,username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next())
+            {
+                preparedStatement.close();
+                resultSet.close();
+                connection.close();
+                throw new DAOException("Invalid username/password");
+            }
+            UserLoginDTO userLoginDTO=new UserLoginDTO();
+            userLoginDTO.setUsername(resultSet.getString("userloginid").trim());
+            userLoginDTO.setPassword(resultSet.getString("password").trim());
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+            return userLoginDTO;
+        }catch(SQLException sqlException)
+        {
+            throw new DAOException(sqlException.getMessage());
+        }
+    }
+
 }

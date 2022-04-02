@@ -37,6 +37,7 @@
   <main>
 
  <link rel='stylesheet' type='text/css' href='/customerRegistration/css/registrationForm.css'>
+ <script src='/customerRegistration/js/LoginForm.js'></script>
 <jsp:useBean id='errorBean' scope='request' class='bean.ErrorBean' />
  <div class="container">
                 <div class="header">
@@ -47,17 +48,17 @@
                  <jsp:getProperty name='errorBean' property='error' />
                  </div>
 
-         <form class="form-login" action='/customerRegistration/Registration.jsp'>
+         <form method='post' class="form-login"  onsubmit="return validateForm(this)" action='/customerRegistration/Registration.jsp'>
 
               <div class="form-input">
                   <label>First name</label>
-                  <input type="text" id ="firstName" name="firstName" class="name-input" placeholder="Enter your first name">
+                  <input type="text" id ="firstName" name="firstName" class="name-input" placeholder="Enter your first name" required>
                   <small>Error</small>
               </div>
 
                <div class="form-input">
                             <label>Last name</label>
-                            <input type="text" id ="lastName" name="lastName" class="name-input" placeholder="Enter your last name">
+                            <input type="text" id ="lastName" name="lastName" class="name-input" placeholder="Enter your last name" required>
                             <small>Error</small>
               </div>
 
@@ -95,19 +96,19 @@
 
             <div class="form-input">
                 <label>Phone</label>
-                <input type="number" id="phone" name="phone" class="email-input" placeholder="phone no.">
+                <input type="number" id="phone" name="phone" class="email-input" placeholder="phone no." required>
                 <small>Error</small>
             </div>
 
             <div class="form-input">
-                <label>Username</label>
-                <input type="text" id="username" name="username" class="email-input" placeholder="username">
+                <label>Username/email</label>
+                <input type="text" id="username" name="username" class="email-input" placeholder="username" required>
                 <small>Error</small>
             </div>
 
             <div class="form-input">
                 <label>Password</label>
-                <input type="password" name="password" class="psd-input" placeholder="Enter your password">
+                <input type="password" name="password" class="psd-input" placeholder="Enter your password" required>
                 <small>Error</small>
             </div>
 

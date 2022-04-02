@@ -22,7 +22,7 @@
             That freedom pushes them to the forefront and allows them to be leaders of their industries.
             We proud to say our partners are leaders.
           </p>
-          <a href="/UsersView.jsp" class="btn">Users</a>
+          <a href="/customerRegistration/UsersView" class="btn">Users</a>
           <h3 style="text-align: right; font-size: 52px;">Technology Freedom For The Win.</h3>
         </div>
         <img src="https://www.hotwaxsystems.com/wp-content/uploads/2019/03/hotwax-systems-logo_fe34b522273d8b9d6ef33253908487bf.png" alt="" />

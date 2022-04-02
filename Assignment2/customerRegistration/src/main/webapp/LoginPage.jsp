@@ -1,3 +1,4 @@
+
  <link rel='stylesheet' type='text/css' href='/customerRegistration/css/headerFooter.css'>
   <!--
     templateType: global_partial
@@ -39,29 +40,34 @@
  <head>
  <link rel='stylesheet' type='text/css' href='/customerRegistration/css/loginPage.css'>
  <script src='/customerRegistration/js/LoginForm.js'></script>
- <title>Customer Registration</title>
+ <jsp:useBean id='errorBean' scope='request' class='bean.ErrorBean' />
+
+ <title>Customer Login</title>
  </head>
  <div class="container">
             <div class="myCard">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="myLeftCtn">
-                        <form  method='post' class="myForm text-center needs-validation" onsubmit="return validateForm(this)"  action='/customerRegistration/Login.jsp'>
+                        <form method="post" class="myForm text-center needs-validation" onsubmit="return validateForm(this)"  action='/customerRegistration/Login.jsp'>
                             <header>LOGIN</header>
+                               <div class = 'error'>
+                               <jsp:getProperty name='errorBean' property='error' />
+                               </div>
                             <div class="form-group">
                                 <i class="fas fa-user"></i>
-                                <input class="myInput" type="text" placeholder="Username" id="username" required>
+                                <input class="myInput" type="text" placeholder="Username" id="username" name="username" required>
                                 <br><br>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                             <br>
                             <div class="form-group">
                                 <i class="fas fa-lock"></i>
-                                <input class="myInput" type="password" id="password" placeholder="Password" required>
+                                <input class="myInput" type="password" id="password" name="password" placeholder="Password" required>
                             <br><br>    <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                             <br>
-                            <input type="submit" class="butt" value="LOGIN">
+                            <button type="submit" class="butt" >LOGIN</button>
                             <br><br>
                             <header>New user</header>
                             <a href="/customerRegistration/RegistrationForm.jsp" class="butt">create new account</a>

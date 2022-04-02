@@ -17,4 +17,23 @@
     <url-pattern>/Registration</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>UsersView</servlet-name>
+    <servlet-class>servlet.UsersView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UsersView</servlet-name>
+    <url-pattern>/UsersView</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>servlet.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+
+
 </web-app>

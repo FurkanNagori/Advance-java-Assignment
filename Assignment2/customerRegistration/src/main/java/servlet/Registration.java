@@ -13,9 +13,6 @@ import javax.servlet.http.*;
 
 public class Registration extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
-    doPost(request,response);
-    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -55,7 +52,7 @@ public class Registration extends HttpServlet {
                 userLoginDTO.setPassword(password);
                 UserDAO userDAO = new UserDAO();
                 userDAO.add(userDTO, userLoginDTO);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Index.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
                 requestDispatcher.forward(request, response);
 
             } catch (DAOException daoException) {
@@ -71,10 +68,8 @@ public class Registration extends HttpServlet {
                 }
 
             }
-
-
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ErrorPage.jsp");
             try {
                 requestDispatcher.forward(request, response);

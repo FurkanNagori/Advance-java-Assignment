@@ -3,7 +3,10 @@ body
     background: #fff fixed;
 }
 
-
+.error
+{
+color:red;
+}
 .container
 {
     position: absolute;
