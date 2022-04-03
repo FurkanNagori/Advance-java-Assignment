@@ -1,3 +1,4 @@
+<head><title>Registration</title></head>
  <link rel='stylesheet' type='text/css' href='/customerRegistration/css/headerFooter.css'>
   <!--
     templateType: global_partial

@@ -19,10 +19,10 @@
        <li class="show hidden-md w-50-lg w-100">
          <ul id="navLinkBox" class="m-0 list-style-type-none flex-lg hidden justify-between align-items-center">
            <li class="head-nav-item">
-             <a href="#" class="text-decoration-none text-white ">HotWax</a>
+             <a href="/customerRegistration/Index.jsp" class="text-decoration-none text-white ">HotWax</a>
            </li>
            <li class="head-nav-item">
-             <a href="/customerRegistration/LoginPage.jsp"class="head-nav-item-button pt-10 pb-10 pl-15 pr-15 rounded-full inline-flex justify-center align-items-center shadow text-bold glow-on-hover position-relative mt-0-lg mt-15">
+             <a href="/customerRegistration/Logout"class="head-nav-item-button pt-10 pb-10 pl-15 pr-15 rounded-full inline-flex justify-center align-items-center shadow text-bold glow-on-hover position-relative mt-0-lg mt-15">
                <span class="text-white">Log out</span>
                <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" class="text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />

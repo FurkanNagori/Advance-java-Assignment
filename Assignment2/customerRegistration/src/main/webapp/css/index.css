@@ -4,6 +4,11 @@
   --overlay-color: rgba(0, 0, 0, 0.7);
 }
 
+
+.text-white{
+  color: black;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
