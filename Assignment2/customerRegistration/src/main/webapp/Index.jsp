@@ -1,7 +1,6 @@
 <jsp:include page='/Header.jsp'/>
 <link rel='stylesheet' type='text/css' href='/customerRegistration/css/index.css'>
- <script src='/customerRegistration/js/index.js'></script>
-
+<script src='/customerRegistration/js/index.js'></script>
  <nav class="navbar">
       <div class="container">
         <h1 class="logo">Hotwax</h1>

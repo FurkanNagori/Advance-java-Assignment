@@ -16,9 +16,21 @@ public class DeleteUser extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
+            HttpSession httpSession = request.getSession();
+            String username=(String)httpSession.getAttribute("username");
+            if(username==null)
+            {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+                requestDispatcher.forward(request,response);
+            }
             int partyId = Integer.parseInt(request.getParameter("partyId"));
             try {
                 UserDAO userDAO = new UserDAO();
+                boolean flag = userDAO.isSameUser(partyId,username);
+                System.out.println(flag);
+                if(flag){
+                    throw new DAOException("can't delete yourself");
+                     }
                 userDAO.delete(partyId);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/UsersView");
                 try {

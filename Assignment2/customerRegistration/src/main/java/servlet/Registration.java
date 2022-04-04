@@ -16,6 +16,13 @@ public class Registration extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
+            HttpSession httpSession = request.getSession();
+            String userName=(String)httpSession.getAttribute("username");
+            if(userName==null)
+            {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+                requestDispatcher.forward(request,response);
+            }
             UserBean userBean = (UserBean) request.getAttribute("userBean");
             String firstName = userBean.getFirstName();
             String lastName = userBean.getLastName();
@@ -51,14 +58,11 @@ public class Registration extends HttpServlet {
                 ErrorBean errorBean = new ErrorBean();
                 errorBean.setError(daoException.getMessage());
                 request.setAttribute("errorBean", errorBean);
-                errorBean.setError(daoException.getMessage());
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/RegistrationForm.jsp");
                 try {
                     requestDispatcher.forward(request, response);
                 } catch (Exception e) {
-
                 }
-
             }
         } catch (Exception exception) {
             System.out.println("ye wali "+exception.getMessage());

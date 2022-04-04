@@ -103,6 +103,103 @@ public class UserDAO {
         }
     }
 
+    public Map<UserLoginDTO, UserDTO> search(String name) throws DAOException {
+        String firstName ="";
+        String lastName ="";
+        if (name.contains(" ")) {
+            String[] fullName = name.split(" ");
+            firstName = fullName[0];
+            lastName = fullName[1];
+        }
+        try{
+            Map<UserLoginDTO, UserDTO> userDTOS = new HashMap<>();
+            UserDTO userDTO;
+            UserLoginDTO userLoginDTO;
+            if (firstName.length()!=0 && lastName.length()!=0) {
+                Connection connection = DAOConnection.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("Select party.partyid,party.firstname,party.lastname,party.address,party.city,party.zip,party.state,party.country,party.phone,userlogin.userloginid  from party inner join userlogin on party.partyid=userlogin.partyid where firstname=? and lastname=?");
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+
+                    userDTO = new UserDTO();
+                    userLoginDTO = new UserLoginDTO();
+                    userDTO.setPartyId(resultSet.getInt("partyid"));
+                    userDTO.setFirstName(resultSet.getString("firstname").trim());
+                    userDTO.setLastName(resultSet.getString("lastname").trim());
+                    userDTO.setAddress(resultSet.getString("address").trim());
+                    userDTO.setCity(resultSet.getString("city").trim());
+                    userDTO.setZip(resultSet.getInt("zip"));
+                    userDTO.setState(resultSet.getString("state").trim());
+                    userDTO.setCountry(resultSet.getString("country").trim());
+                    userDTO.setPhone(resultSet.getString("phone").trim());
+                    userLoginDTO.setUsername(resultSet.getString("userloginid").trim());
+                    userDTOS.put(userLoginDTO, userDTO);
+
+                }
+                preparedStatement.close();
+                resultSet.close();
+                connection.close();
+                return userDTOS;
+            }
+            System.out.println(name);
+                if (name.length()!=0) {
+                    Connection connection = DAOConnection.getConnection();
+                    PreparedStatement preparedStatement = connection.prepareStatement("Select party.partyid,party.firstname,party.lastname,party.address,party.city,party.zip,party.state,party.country,party.phone,userlogin.userloginid  from party inner join userlogin on party.partyid=userlogin.partyid where firstname=?");
+                    preparedStatement.setString(1, name);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+
+                        userDTO = new UserDTO();
+                        userLoginDTO = new UserLoginDTO();
+                        userDTO.setPartyId(resultSet.getInt("partyid"));
+                        userDTO.setFirstName(resultSet.getString("firstname").trim());
+                        userDTO.setLastName(resultSet.getString("lastname").trim());
+                        userDTO.setAddress(resultSet.getString("address").trim());
+                        userDTO.setCity(resultSet.getString("city").trim());
+                        userDTO.setZip(resultSet.getInt("zip"));
+                        userDTO.setState(resultSet.getString("state").trim());
+                        userDTO.setCountry(resultSet.getString("country").trim());
+                        userDTO.setPhone(resultSet.getString("phone").trim());
+                        userLoginDTO.setUsername(resultSet.getString("userloginid").trim());
+                        userDTOS.put(userLoginDTO, userDTO);
+
+                    }
+
+                    preparedStatement = connection.prepareStatement("Select party.partyid,party.firstname,party.lastname,party.address,party.city,party.zip,party.state,party.country,party.phone,userlogin.userloginid  from party inner join userlogin on party.partyid=userlogin.partyid where lastname=?");
+                    preparedStatement.setString(1, name);
+                    resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+
+                        userDTO = new UserDTO();
+                        userLoginDTO = new UserLoginDTO();
+                        userDTO.setPartyId(resultSet.getInt("partyid"));
+                        userDTO.setFirstName(resultSet.getString("firstname").trim());
+                        userDTO.setLastName(resultSet.getString("lastname").trim());
+                        userDTO.setAddress(resultSet.getString("address").trim());
+                        userDTO.setCity(resultSet.getString("city").trim());
+                        userDTO.setZip(resultSet.getInt("zip"));
+                        userDTO.setState(resultSet.getString("state").trim());
+                        userDTO.setCountry(resultSet.getString("country").trim());
+                        userDTO.setPhone(resultSet.getString("phone").trim());
+                        userLoginDTO.setUsername(resultSet.getString("userloginid").trim());
+                        userDTOS.put(userLoginDTO, userDTO);
+
+                    }
+                    preparedStatement.close();
+                    resultSet.close();
+                    connection.close();
+                    return userDTOS;
+                }
+                return userDTOS;
+
+            } catch (Exception exception) {
+                throw new DAOException(exception.getMessage());
+            }
+
+        }
+
 
     public UserLoginDTO getByUsername(String username) throws DAOException {
         try {
@@ -221,16 +318,43 @@ public class UserDAO {
             preparedStatement.setInt(1, partyId);
             preparedStatement.executeUpdate();
             preparedStatement.close();
-            preparedStatement = connection.prepareStatement("delete from party where partyid=?");
+            preparedStatement = connection.prepareStatement("delete from userlogin where partyid=?");
             preparedStatement.setInt(1, partyId);
             preparedStatement.executeUpdate();
             connection.close();
             preparedStatement.close();
+
 
         } catch (Exception exception) {
             throw new DAOException("Invalid party id " + partyId);
         }
     }
 
-
+    public boolean isSameUser(int partyId,String username) throws DAOException {
+        try {
+            Connection connection = DAOConnection.getConnection();
+            PreparedStatement preparedStatement;
+            preparedStatement = connection.prepareStatement("select userloginid from userlogin where partyid=?");
+            preparedStatement.setInt(1, partyId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+                throw new DAOException("Invalid party id : " + partyId);
+            }
+            if (resultSet.getString("userloginid").trim().equals(username)) {
+                connection.close();
+                preparedStatement.close();
+                resultSet.close();
+                return true;
+            }
+            preparedStatement.close();
+            resultSet.close();
+            connection.close();
+        } catch (Exception exception) {
+            throw new DAOException("Invalid party id " + partyId);
+        }
+    return false;
+    }
 }

@@ -1,22 +1,28 @@
 package servlet;
 
 import bean.UserBean;
-import bean.UserLoginBean;
 import dao.DAOException;
 import dao.UserDAO;
 import dto.UserDTO;
-import dto.UserLoginDTO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class EditUser extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
 
 
         try {
+            HttpSession httpSession = request.getSession();
+            String username=(String)httpSession.getAttribute("username");
+            if(username==null)
+            {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+                requestDispatcher.forward(request,response);
+            }
             int partyId = Integer.parseInt(request.getParameter("partyId"));
             UserDAO userDAO = new UserDAO();
             UserDTO userDTO;

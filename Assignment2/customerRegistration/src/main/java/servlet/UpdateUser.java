@@ -10,6 +10,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class UpdateUser extends HttpServlet
 {
@@ -17,6 +18,13 @@ public class UpdateUser extends HttpServlet
     {
         try
         {
+            HttpSession httpSession = request.getSession();
+            String username=(String)httpSession.getAttribute("username");
+            if(username==null)
+            {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/loginPage.jsp");
+                requestDispatcher.forward(request,response);
+            }
             UserBean userBean = (UserBean) request.getAttribute("userBean");
             try
             {

@@ -1,3 +1,12 @@
+<%
+HttpSession httpSession = request.getSession();
+            String username=(String)httpSession.getAttribute("username");
+            if(username==null)
+            {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+                requestDispatcher.forward(request,response);
+            }
+%>
 <link rel='stylesheet' type='text/css' href='/customerRegistration/css/headerFooter.css'>
  <!--
    templateType: global_partial

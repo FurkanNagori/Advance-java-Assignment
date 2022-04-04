@@ -1,5 +1,6 @@
 package servlet;
-
+import bean.ErrorBean;
+import dao.DAOException;
 import dao.UserDAO;
 import dto.UserDTO;
 import dto.UserLoginDTO;
@@ -13,25 +14,28 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 
-public class UsersView extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+public class Search extends HttpServlet {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-
             HttpSession httpSession = request.getSession();
             String username=(String)httpSession.getAttribute("username");
             if(username==null)
             {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/loginPage.jsp");
                 requestDispatcher.forward(request,response);
             }
-            Map<UserLoginDTO, UserDTO> users = new UserDAO().getAll();
-
+             String name = request.getParameter("name").trim();
+            Map<UserLoginDTO, UserDTO> users = new UserDAO().search(name);
+            if(users.isEmpty()){
+                throw new DAOException("No data Found");
+            };
             PrintWriter pw = response.getWriter();
             response.setContentType("text/html");
             UserDTO userDTO;
             UserLoginDTO userLoginDTO;
             // Header starts here.
+
             pw.println("<link rel='stylesheet' type='text/css' href='/customerRegistration/css/headerFooter.css'>");
             pw.println("<!--");
             pw.println("templateType: global_partial");
@@ -72,15 +76,6 @@ public class UsersView extends HttpServlet {
             pw.println("<link rel='stylesheet' type='text/css' href='/customerRegistration/css/usersView.css'>");
             pw.println("<h2>User Details table</h2>");
             pw.println("<p>table with detail view</p>");
-            pw.println("<form method=\"post\" class=\"myForm text-center needs-validation\" onsubmit=\"return validateForm(this)\"  action='/customerRegistration/Search'>");
-            pw.println("<div class=\"form - group\">");
-            pw.println("<i class=\"fas fa - user\"></i>");
-            pw.println("<input class=\"myInput\" type=\"text\" placeholder=\"What you looking for.\" id=\"name\" name=\"name\" required>");
-            pw.println("</div>");
-            pw.println("<br>");
-            pw.println("<button type=\"submit\" class=\"butt\" >Search</button>");
-
-            pw.println("</form>");
             pw.println("<br>");
             pw.println("<span class=\"counter pull-right\"></span>");
             pw.println("<table id=\"usertab\">");
@@ -117,14 +112,25 @@ public class UsersView extends HttpServlet {
                 pw.println("</tr>");
             }
 
-        } catch (Exception exception) {
+        }
+        catch(DAOException daoException){
+            System.out.println("yha h"+daoException.getMessage());
+            ErrorBean errorBean = new ErrorBean();
+            errorBean.setError(daoException.getMessage());
+            request.setAttribute("errorBean", errorBean);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/UsersView");
+            try {
+                requestDispatcher.forward(request, response);
+            } catch (Exception e) {
+
+            }
+        }
+        catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
 
 
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
-        doGet(request, response);
-    }
+
 }
