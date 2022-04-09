@@ -15,9 +15,8 @@ HttpSession httpSession = request.getSession();
  <header class="bg-primary-gradiant">
    <div class="pt-10 pb-10 pl-0-lg pr-0-lg pl-10 pr-10 c-container m-auto ">
      <ul class="list-style-type-none flex justify-between align-items-center m-0">
-       <li class="head-nav-item w-10-lg w-50">
-
-       </li>
+         <li class="head-nav-item">
+         </li>
        <li class="head-nav-item-button hidden-lg show-md w-50 text-right" id="navToggle">
          <div class="glow-on-hover inline-block">
          <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" class="text-white" fill="#fff" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -19,11 +19,10 @@ public class UsersView extends HttpServlet {
         try {
 
             HttpSession httpSession = request.getSession();
-            String username=(String)httpSession.getAttribute("username");
-            if(username==null)
-            {
+            String username = (String) httpSession.getAttribute("username");
+            if (username == null) {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
-                requestDispatcher.forward(request,response);
+                requestDispatcher.forward(request, response);
             }
             Map<UserLoginDTO, UserDTO> users = new UserDAO().getAll();
 
@@ -41,6 +40,9 @@ public class UsersView extends HttpServlet {
             pw.println("<div class=\"pt-10 pb-10 pl-0-lg pr-0-lg pl-10 pr-10 c-container m-auto \">");
             pw.println("<ul class=\"list-style-type-none flex justify-between align-items-center m-0\">");
             pw.println("<li class=\"head-nav-item w-10-lg w-50\">");
+            pw.println("<form>");
+            pw.println("<input type=\"button\" class=\"head-nav-item-button pt-10 pb-10 pl-15 pr-15 rounded-full inline-flex justify-center align-items-center shadow text-bold glow-on-hover position-relative mt-0-lg mt-15\" value=\"Go-back\" onclick=\"history.back()\">");
+            pw.println("</form>");
             pw.println("</li>");
             pw.println("<li class=\"head-nav-item-button hidden-lg show-md w-50 text-right\" id=\"navToggle\">");
             pw.println("<div class=\"glow-on-hover inline-block\">");
@@ -109,7 +111,7 @@ public class UsersView extends HttpServlet {
                 pw.println("<td>" + userDTO.getCountry() + "</td>");
                 pw.println("<td>" + userDTO.getPhone() + "</td>");
                 pw.println("<td>");
-                pw.println("<div class=\"select\"\"><a href='/customerRegistration/EditUser?partyId=" + userDTO.getPartyId() + "'>edit</a></div>");
+                pw.println("<div class=\"select\"\"><a href='/customerRegistration/EditUser?partyId=" + userDTO.getPartyId() + "'>update</a></div>");
                 pw.println("</td>");
                 pw.println("<td>");
                 pw.println("<div class=\"select\"\"><a href='/customerRegistration/DeleteUser?partyId=" + userDTO.getPartyId() + "'>Delete</a></div>");

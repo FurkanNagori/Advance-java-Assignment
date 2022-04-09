@@ -1,0 +1,12 @@
+html,
+body {
+    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+    background: rgba(200,200,200,0.2);
+}
+.container-720 {
+    max-width: 720px;
+    margin: auto;
+    background: #fff;
+}

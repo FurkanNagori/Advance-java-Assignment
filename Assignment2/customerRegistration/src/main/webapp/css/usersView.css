@@ -31,11 +31,11 @@ table {
 }
 tr {
   background-color: #E6E6FA;
-  border-collapse: none;
+
 }
 tr:nth-child(odd) {
   background-color: #9370DB;
-  border-collapse: none;
+
 }
 th {
   width: 20%;

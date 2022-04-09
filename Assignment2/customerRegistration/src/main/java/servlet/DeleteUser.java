@@ -31,7 +31,9 @@ public class DeleteUser extends HttpServlet {
                 if(flag){
                     throw new DAOException("can't delete yourself");
                      }
-                userDAO.delete(partyId);
+                else {
+                    userDAO.delete(partyId);
+                }
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/UsersView");
                 try {
                     requestDispatcher.forward(request, response);
@@ -40,7 +42,11 @@ public class DeleteUser extends HttpServlet {
 
             } catch (DAOException daoException) {
                 System.out.println(daoException.getMessage());
-
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/UsersView");
+                try {
+                    requestDispatcher.forward(request, response);
+                } catch (Exception e) {
+                }
             }
 
         } catch (Exception exception) {

@@ -1,12 +1,14 @@
 package servlet;
 
 import bean.ErrorBean;
+import bean.MessageBean;
 import bean.UserBean;
 import bean.UserLoginBean;
 import dao.DAOException;
 import dao.UserDAO;
 import dto.UserDTO;
 import dto.UserLoginDTO;
+//import helper.sendEmail;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,13 +17,13 @@ public class Registration extends HttpServlet {
 
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
+        //      sendEmail send  = new sendEmail();
         try {
             HttpSession httpSession = request.getSession();
-            String userName=(String)httpSession.getAttribute("username");
-            if(userName==null)
-            {
+            String userName = (String) httpSession.getAttribute("username");
+            if (userName == null) {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
-                requestDispatcher.forward(request,response);
+                requestDispatcher.forward(request, response);
             }
             UserBean userBean = (UserBean) request.getAttribute("userBean");
             String firstName = userBean.getFirstName();
@@ -51,8 +53,15 @@ public class Registration extends HttpServlet {
                 userLoginDTO.setPassword(password);
                 UserDAO userDAO = new UserDAO();
                 userDAO.add(userDTO, userLoginDTO);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LoginPage.jsp");
-                requestDispatcher.forward(request, response);
+                // System.out.print(send.sendEmail(userLoginDTO));
+                MessageBean messageBean = new MessageBean();
+                messageBean.setMessage("Registration successfull");
+                messageBean.setButtonText("Login now");
+                messageBean.setButtonAction("/LoginPage.jsp");
+                request.setAttribute("messageBean",messageBean);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Notification.jsp");
+                requestDispatcher.forward(request,response);
+
 
             } catch (DAOException daoException) {
                 ErrorBean errorBean = new ErrorBean();
@@ -65,7 +74,7 @@ public class Registration extends HttpServlet {
                 }
             }
         } catch (Exception exception) {
-            System.out.println("ye wali "+exception.getMessage());
+            System.out.println(exception.getMessage());
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ErrorPage.jsp");
             try {
                 requestDispatcher.forward(request, response);
@@ -73,8 +82,6 @@ public class Registration extends HttpServlet {
 
             }
         }
-
-
     }
 
 }

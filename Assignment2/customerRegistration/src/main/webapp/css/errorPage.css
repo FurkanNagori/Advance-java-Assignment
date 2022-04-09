@@ -18,7 +18,8 @@ body {
   text-align: center;
   margin: auto;
   padding: 4em;
-  img {
+}
+img {
     width: 256px;
     height: 225px;
   }
@@ -27,11 +28,11 @@ body {
     margin-top: 1rem;
     font-size: 35px;
     text-align: center;
-
+  }
     span {
       font-size: 60px;
     }
-  }
+
   p {
     margin-top: 1rem;
   }
@@ -39,10 +40,11 @@ body {
   p.info {
     margin-top: 4em;
     font-size: 12px;
+  }
 
     a {
       text-decoration: none;
       color: rgb(84, 84, 206);
     }
-  }
-}
+
+
